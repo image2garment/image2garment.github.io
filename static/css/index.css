@@ -1,0 +1,283 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+  color: #555;
+  width: fit-content;
+  font-weight: bold;
+}
+
+.publication-awards {
+  color: #ff3860;
+  width: fit-content;
+  font-weight: bolder;
+}
+
+.publication-authors {}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+
+  overflow: hidden;
+  border-radius: 10px !important;
+}
+
+.publication-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.publication-body img {}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+.comparison-grid,
+.comparison-row {
+  display: grid;
+  grid-template-columns: repeat(6, 200px);
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  row-gap: 16px;
+}
+
+.comparison-grid {
+  margin-bottom: 20px;
+}
+
+.comparison-row {
+  margin-bottom: 24px;
+}
+
+.comparison-grid .label {
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.static-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #eee;
+  position: relative;
+}
+
+.zoomable {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.05s ease-out;
+}
+
+.comparison-row video {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #222;
+}
+
+.comparison-grid-3,
+.comparison-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  row-gap: 16px;
+  margin-bottom: 24px;
+}
+
+.comparison-grid-3 .label {
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.comparison-row-3 video {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #222;
+}
+
+.video-placeholder {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#baseline-references {
+  margin-top: 40px;
+}
+
+.reference-list {
+  margin-top: 10px;
+}
+
+.reference-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.ref-index {
+  width: 30px;
+  flex-shrink: 0;
+  display: inline-block;
+  line-height: 1.4;
+}
+
+.ref-text {
+  display: inline-block;
+  line-height: 1.4;
+}
+
+@media(max-width:1024px) {
+
+  .comparison-grid,
+  .comparison-row {
+    grid-template-columns: repeat(3, 200px);
+    justify-content: center;
+  }
+}
+
+@media(max-width:600px) {
+
+  .comparison-grid,
+  .comparison-row {
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+}
