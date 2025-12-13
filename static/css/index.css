@@ -204,7 +204,7 @@ body {
 .comparison-grid-3,
 .comparison-row-3 {
   display: grid;
-  grid-template-columns: repeat(3, 200px);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   justify-content: center;
   align-items: center;
@@ -219,8 +219,8 @@ body {
 }
 
 .comparison-row-3 video {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: auto;
   border-radius: 10px;
   object-fit: cover;
   background: #222;
