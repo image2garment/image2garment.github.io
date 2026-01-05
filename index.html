@@ -63,7 +63,8 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Image2Garment: Simulation-ready Garments from a Single Image</h1>
+            <h1 class="title is-1 publication-title">Image2Garment: Simulation-ready Garment Generation from a Single
+              Image</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
                 <a href="https://selim-emir-can.github.io/">Selim Emir Can</a><sup>*,1</sup>,</span>
@@ -150,7 +151,7 @@
           <!-- Interpolating. -->
           <div class="content has-text-justified">
             <p>
-              Our method enables prediction of simulation-ready garments from a single image.
+              Our method enables generation of simulation-ready garments from a single image.
               We obtain both the garment geometry represented by a 3D mesh and the physical parameters required for
               simulation. With these we can animate the garment in a simulator showing it interacting with the
               environment in a realistic manner. Our prediction is optimization-free and can be computed in seconds.
@@ -170,23 +171,18 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>Estimating physically accurate, simulation-ready garments from a single image is challenging due to the
-              absence of image-to-physics datasets, and the ill-posed nature of this problem. Prior methods either
-              require
-              multi-view capture and expensive differentiable simulation or predict only garment geometry without the
-              material properties required for realistic simulation.</p>
+              absence of image-to-physics datasets and the ill-posed nature of this problem. Prior methods either
+              require multi-view capture and expensive differentiable simulation or predict only
+              garment geometry without the material properties required for realistic simulation.</p>
             <p>We propose a feed-forward framework that sidesteps these limitations by first fine-tuning a
-              vision–language
-              model to infer material composition and fabric attributes from real images, and then training a
-              light-weight
-              predictor that maps these attributes to the corresponding physical fabric parameters using a small dataset
-              of
-              material–physics measurements.</p>
+              vision–language model to infer material composition and fabric attributes from real images, and then
+              training a light-weight predictor that maps these attributes to the corresponding physical fabric
+              parameters using a small dataset of material–physics measurements.</p>
             <p>Our approach introduces two new datasets (FTAG and T2P) and delivers simulation-ready garments from a
-              single
-              image without iterative optimization. Experiments show that our estimator achieves superior accuracy in
-              material composition estimation and fabric attribute prediction, and by passing them through our physics
-              parameter estimator, we further achieve higher fidelity simulations compared to state-of-the-art
-              image-to-garment methods.</p>
+              single image without iterative optimization. Experiments show that our estimator achieves superior
+              accuracy in material composition estimation and fabric attribute prediction, and by passing them through
+              our physics parameter estimator, we further achieve higher fidelity simulations compared to
+              state-of-the-art image-to-garment methods.</p>
           </div>
         </div>
       </div>
@@ -237,10 +233,14 @@
             <div class="static-container">
               <img class="zoomable" src="Figures/input_01.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2garment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2AIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2chatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2ours_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline1/jumping_jack_v2garment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline1/jumping_jack_v2AIparrel_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline1/jumping_jack_v2chatgarment_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline1/jumping_jack_v2ours_rendered_output.mp4"></video>
             <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jackgt_rendered_output.mp4"></video>
           </div>
 
@@ -248,20 +248,28 @@
             <div class="static-container">
               <img class="zoomable" src="Figures/input_02.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2garment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2AIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2chatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2ours_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2gt_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline2/northern_spin_v2garment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline2/northern_spin_v2AIparrel_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline2/northern_spin_v2chatgarment_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline2/northern_spin_v2ours_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline2/northern_spin_v2gt_rendered_output.mp4"></video>
           </div>
 
           <div class="comparison-row">
             <div class="static-container">
               <img class="zoomable" src="Figures/input_03.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpgarment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpAIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpchatgarment_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline3/joyful_jumpgarment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline3/joyful_jumpAIparrel_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline3/joyful_jumpchatgarment_rendered_output.mp4"></video>
             <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpours_rendered_output.mp4"></video>
             <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpgt_rendered_output.mp4"></video>
           </div>
@@ -270,16 +278,22 @@
             <div class="static-container">
               <img class="zoomable" src="Figures/input_04.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline src="Videos/baseline4/reaction_hitgarment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline4/reaction_hitAIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline4/reaction_hitchatgarment_v1_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/baseline4/reaction_hitours_v2_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline4/reaction_hitgarment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline4/reaction_hitAIparrel_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline4/reaction_hitchatgarment_v1_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline
+              src="Videos/baseline4/reaction_hitours_v2_rendered_output.mp4"></video>
             <video autoplay loop muted playsinline src="Videos/baseline4/reaction_hitgt_v2_rendered_output.mp4"></video>
           </div>
-          <h4><em>GarmentRecovery*, AIpparel*, and ChatGarment* use the <u>randomly sampled physical parameters</u>. GarmentRecovery* uses the
+          <h4><em>GarmentRecovery*, AIpparel*, and ChatGarment* use the <u>randomly sampled physical parameters</u>.
+              GarmentRecovery* uses the
               only
               published checkpoint.</em></h4>
-          <h4><em>Image2Garment uses the <u>estimated physics parameters</u> and the same garment geometry as ChatGarment.</em>
+          <h4><em>Image2Garment uses the <u>estimated physics parameters</u> and the same garment geometry as
+              ChatGarment.</em>
           </h4>
         </div>
       </div>
