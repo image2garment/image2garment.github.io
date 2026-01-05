@@ -76,6 +76,12 @@
                 <a href="https://ruofanliu0129.github.io/Resume/">Ruofan Liu</a><sup>1</sup>,
               </span>
               <span class="author-block">
+                <a href="https://wutong16.github.io/">Tong Wu</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://y-zheng18.github.io/">Yang Zheng</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
                 <a href="https://hbertiche.github.io/">Hugues Bertiche</a><sup>2</sup>,
               </span>
               <span class="author-block">
@@ -220,7 +226,7 @@
           <!-- labels -->
           <div class="comparison-grid">
             <div class="label">Input Frame</div>
-            <div class="label">DMap* <a href="#ref1">[1]</a></div>
+            <div class="label">GarmentRecovery* <a href="#ref1">[1]</a></div>
             <div class="label">AIpparel* <a href="#ref2">[2]</a></div>
             <div class="label">ChatGarment* <a href="#ref3">[3]</a></div>
             <div class="label">Ours*</div>
@@ -231,11 +237,11 @@
             <div class="static-container">
               <img class="zoomable" src="Figures/input_01.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline src="Videos/jumping_jack_v2dmap_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jumping_jack_v2AIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jumping_jack_v2chatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jumping_jack_v2ours_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jumping_jackgt_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2garment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2AIparrel_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2chatgarment_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jack_v2ours_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline1/jumping_jackgt_rendered_output.mp4"></video>
           </div>
 
           <div class="comparison-row">
@@ -243,10 +249,10 @@
               <img class="zoomable" src="Figures/input_02.png" alt="Static Input">
             </div>
             <div class="video-placeholder">Draping Failed</div>
-            <video autoplay loop muted playsinline src="Videos/northern_spin_v2AIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/northern_spin_v2chatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/northern_spin_v2ours_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/northern_spin_v2gt_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2garment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2chatgarment_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2ours_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline2/northern_spin_v2gt_rendered_output.mp4"></video>
           </div>
 
           <div class="comparison-row">
@@ -254,12 +260,23 @@
               <img class="zoomable" src="Figures/input_03.png" alt="Static Input">
             </div>
             <div class="video-placeholder">Draping Failed</div>
-            <video autoplay loop muted playsinline src="Videos/joyful_jumpAIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/joyful_jumpchatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/joyful_jumpours_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/joyful_jumpgt_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpgarment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpchatgarment_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpours_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline3/joyful_jumpgt_rendered_output.mp4"></video>
           </div>
-          <h4><em>DMap*, AIpparel*, and ChatGarment* use the <u>randomly sampled physical parameters</u>. DMap* uses the
+
+          <div class="comparison-row">
+            <div class="static-container">
+              <img class="zoomable" src="Figures/input_04.png" alt="Static Input">
+            </div>
+            <div class="video-placeholder">Draping Failed</div>
+            <video autoplay loop muted playsinline src="Videos/baseline4/reaction_hitgarment_recovery_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline4/joyful_jumpchatgarment_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline4/joyful_jumpours_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/baseline4/joyful_jumpgt_rendered_output.mp4"></video>
+          </div>
+          <h4><em>GarmentRecovery*, AIpparel*, and ChatGarment* use the <u>randomly sampled physical parameters</u>. GarmentRecovery* uses the
               only
               published checkpoint.</em></h4>
           <h4><em>Ours* uses the <u>estimated physics parameters</u> and the same garment geometry as ChatGarment.</em>
@@ -286,21 +303,21 @@
           </div>
 
           <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="Videos/01_wild_chatgarment.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/01_wild_ours.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/01_wild_gt.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild01/01_wild_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild01/01_wild_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild01/01_wild_gt.mp4"></video>
           </div>
 
           <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="Videos/02_wild_chatgarment.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/02_wild_ours.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/02_wild_gt.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild02/02_wild_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild02/02_wild_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild02/02_wild_gt.mp4"></video>
           </div>
 
           <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="Videos/03_wild_chatgarment.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/03_wild_ours.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/03_wild_gt.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild03/03_wild_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild03/03_wild_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/wild03/03_wild_gt.mp4"></video>
           </div>
         </div>
 
@@ -315,21 +332,21 @@
           </div>
 
           <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="Videos/jumping_random.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jumping_estimated.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jumping_gt.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation1/jumping_random.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation1/jumping_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation1/jumping_gt.mp4"></video>
           </div>
 
           <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="Videos/northern_random.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/northern_estimated.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/northern_gt.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation2/northern_random.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation2/northern_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation2/northern_gt.mp4"></video>
           </div>
 
           <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="Videos/jab_random.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jab_estimated.mp4"></video>
-            <video autoplay loop muted playsinline src="Videos/jab_gt.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation3/jab_random.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation3/jab_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="Videos/ablation3/jab_gt.mp4"></video>
           </div>
         </div>
 
