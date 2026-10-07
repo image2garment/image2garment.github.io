@@ -22,37 +22,114 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
   <style>
-    .container-construction {
-      font-family: Arial, sans-serif;
-      color: #333;
+    /* 5-column comparison grid (input + 4 methods) */
+    .comparison-grid-5,
+    .comparison-row-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 190px);
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      row-gap: 16px;
+    }
+
+    .comparison-grid-5 {
+      margin-bottom: 20px;
+    }
+
+    .comparison-row-5 {
+      margin-bottom: 24px;
+    }
+
+    .comparison-grid-5 .label {
       text-align: center;
-      background: #fff;
-      border: 2px solid #ff9800;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .comparison-row-5 video {
+      width: 190px;
+      height: 190px;
       border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 80%;
-      max-width: 600px;
-      font-size: 1.5em;
+      object-fit: cover;
+      background: #fff;
     }
 
-    .construction-icon {
-      font-size: 5em;
-      margin: 20px 0;
+    .static-container-5 {
+      width: 190px;
+      height: 190px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #fff;
+      position: relative;
     }
 
-    @keyframes progress {
-      0% {
-        width: 0%;
-      }
+    .static-container-5 img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-      50% {
-        width: 50%;
-      }
+    .comparison-grid-4,
+    .comparison-row-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 190px);
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      row-gap: 16px;
+    }
 
-      100% {
-        width: 0%;
-      }
+    .comparison-grid-4 { margin-bottom: 20px; }
+    .comparison-row-4 { margin-bottom: 24px; }
+
+    .comparison-grid-4 .label {
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .comparison-row-4 video {
+      width: 190px;
+      height: 190px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .metrics-table td,
+    .metrics-table th {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .metrics-table .best {
+      font-weight: 700;
+    }
+    .no-result {
+      width: 190px;
+      height: 190px;
+      border-radius: 10px;
+      background: #f4f4f6;
+      border: 1px dashed #cfcfd6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.35;
+      color: #8a8a93;
+      padding: 0 10px;
+    }
+  </style>
+  <style>
+    .wild-missing {
+      display: flex; align-items: center; justify-content: center; height: 100%;
+      min-height: 120px; border: 1px dashed #c8ccd0; border-radius: 4px;
+      color: #8a9096; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase;
     }
   </style>
 </head>
@@ -133,6 +210,7 @@
                     </span>
                     <span>Data (soon)</span>
                   </a>
+                </span>
               </div>
 
             </div>
@@ -144,12 +222,10 @@
 
   <section class="section">
     <div class="container is-max-desktop">
-      <!-- Animation. -->
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <img src="./static/images/teaser.png" alt="Method Teaser" />
+          <img src="./static/images/teaser_v2.png" alt="Method Teaser" />
 
-          <!-- Interpolating. -->
           <div class="content has-text-justified">
             <p>
               Our method enables generation of simulation-ready garments from a single image.
@@ -171,19 +247,20 @@
         <div class="column is-four-fifths">
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
-            <p>Estimating physically accurate, simulation-ready garments from a single image is challenging due to the
-              absence of image-to-physics datasets and the ill-posed nature of this problem. Prior methods either
-              require multi-view capture and expensive differentiable simulation or predict only
-              garment geometry without the material properties required for realistic simulation.</p>
-            <p>We propose a feed-forward framework that sidesteps these limitations by first fine-tuning a
-              vision–language model to infer material composition and fabric attributes from real images, and then
-              training a light-weight predictor that maps these attributes to the corresponding physical fabric
-              parameters using a small dataset of material–physics measurements.</p>
-            <p>Our approach introduces two new datasets (FTAG and T2P) and delivers simulation-ready garments from a
-              single image without iterative optimization. Experiments show that our estimator achieves superior
-              accuracy in material composition estimation and fabric attribute prediction, and by passing them through
-              our physics parameter estimator, we further achieve higher fidelity simulations compared to
-              state-of-the-art image-to-garment methods.</p>
+            <p>Recovering a simulation-ready garment from one image requires both its sewing-pattern geometry
+              and the physical parameters governing its motion. Existing methods either rely on controlled
+              multi-view capture and iterative inverse simulation or recover geometry without usable fabric
+              physics. We introduce Image2Garment, a feed-forward framework with two complementary branches.
+              The geometry branch fine-tunes an image-conditioned GarmentParticles model on geometry-preserving
+              photorealistic adaptations of synthetic renders. The physics branch uses Qwen3.5-9B to infer
+              dominant material, structure, and fabric family from a target-aware crop, then maps this semantic
+              bottleneck to simulator parameters with TabPFN and measured FabriPhys data.</p>
+            <p>We additionally introduce FabriCue for visual fabric-attribute learning, FabriPhys for
+              attribute-to-physics estimation, and SMS for controlled dynamic evaluation. Geometry adaptation
+              reduces 3D Chamfer error by 41.9%; our attribute model reaches 39.83% joint exact match; and the
+              complete system reduces average simulation Chamfer distance from 67.39 and 117.40 for augmented
+              single-image baselines to 34.59. Together, these components enable physically grounded garment
+              reconstruction without paired image&ndash;physics data or per-garment inverse optimization.</p>
           </div>
         </div>
       </div>
@@ -191,19 +268,22 @@
 
   <section class="section">
     <div class="container is-max-desktop">
-      <!-- Animation. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-3">Method</h2>
-          <img src="./static/images/pipeline.png" alt="Method Overview" />
+          <a href="./static/images/Pipeline_2col_updated_crop_v2.pdf" target="_blank" rel="noopener">
+            <img src="./static/images/method_overview_updated.png" alt="Method overview: image-to-garment geometry reconstruction and fabric attribute estimation for physics-based simulation" />
+          </a>
 
-          <!-- Interpolating. -->
           <div class="content has-text-justified">
             <p>
-              We first estimate the garment geometry using an off-the-shelf fine-tuned vision-language-model.
-              Then, we utilize another vision-language-model trained to predict the material properties of the garments.
-              Finally, we use a light-weight predictor to map the estimated garment materials to physical properties of
-              a simulator.
+              Two complementary branches process a single image. The geometry branch reconstructs a sewing
+              pattern with an adapted image-conditioned GarmentParticles <a href="#ref3">[3]</a> model,
+              fine-tuned on geometry-preserving photorealistic adaptations of synthetic renders. In parallel,
+              the physics branch extracts a target-aware garment crop, predicts the dominant material,
+              structure, and fabric family with a fine-tuned Qwen3.5-9B, and maps these attributes to
+              simulator physics parameters with TabPFN trained on measured FabriPhys data. The two outputs
+              are combined only for the final garment simulation.
             </p>
           </div>
         </div>
@@ -211,7 +291,6 @@
 
     </div>
   </section>
-
 
   <section class="section" id="comparisons">
     <div class="container is-max-desktop">
@@ -221,80 +300,186 @@
           <h2 class="title is-3">Baseline Comparisons (Simulations)</h2>
 
           <!-- labels -->
-          <div class="comparison-grid">
+          <div class="comparison-grid-5">
             <div class="label">Input Frame</div>
-            <div class="label">GarmentRecovery* <a href="#ref1">[1]</a></div>
-            <div class="label">AIpparel* <a href="#ref2">[2]</a></div>
-            <div class="label">ChatGarment* <a href="#ref3">[3]</a></div>
+            <div class="label">AIpparel* <a href="#ref1">[1]</a></div>
+            <div class="label">ChatGarment* <a href="#ref2">[2]</a></div>
             <div class="label">Image2Garment (ours)</div>
             <div class="label">Ground Truth</div>
           </div>
 
-          <div class="comparison-row">
-            <div class="static-container">
-              <img class="zoomable" src="figures/input_01.png" alt="Static Input">
+          <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_jj_row040.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline
-              src="videos/baseline1/jumping_jack_v2garment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline1/jumping_jack_v2AIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline1/jumping_jack_v2chatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline1/jumping_jack_v2ours_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/baseline1/jumping_jackgt_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/jj_row040_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/jj_row040_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/jj_row040_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/jj_row040_gt.mp4"></video>
           </div>
 
-          <div class="comparison-row">
-            <div class="static-container">
-              <img class="zoomable" src="figures/input_02.png" alt="Static Input">
+          <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_joy_row069.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline
-              src="videos/baseline2/northern_spin_v2garment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline2/northern_spin_v2AIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline2/northern_spin_v2chatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline2/northern_spin_v2ours_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline2/northern_spin_v2gt_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row069_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row069_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row069_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row069_gt.mp4"></video>
           </div>
 
-          <div class="comparison-row">
-            <div class="static-container">
-              <img class="zoomable" src="figures/input_03.png" alt="Static Input">
+          <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_joy_row056.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline
-              src="videos/baseline3/joyful_jumpgarment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline3/joyful_jumpAIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline3/joyful_jumpchatgarment_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/baseline3/joyful_jumpours_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/baseline3/joyful_jumpgt_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row056_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row056_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row056_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/joy_row056_gt.mp4"></video>
           </div>
 
-          <div class="comparison-row">
-            <div class="static-container">
-              <img class="zoomable" src="figures/input_04.png" alt="Static Input">
+          <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_hit_row006.png" alt="Static Input">
             </div>
-            <video autoplay loop muted playsinline
-              src="videos/baseline4/reaction_hitgarment_recovery_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline4/reaction_hitAIparrel_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline4/reaction_hitchatgarment_v1_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline
-              src="videos/baseline4/reaction_hitours_v2_rendered_output.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/baseline4/reaction_hitgt_v2_rendered_output.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row006_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row006_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row006_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row006_gt.mp4"></video>
           </div>
-          <h4><em>GarmentRecovery*, AIpparel*, and ChatGarment* use the <u>randomly sampled physical parameters</u>.
-              GarmentRecovery* uses the
-              only
-              published checkpoint.</em></h4>
-          <h4><em>Image2Garment uses the <u>estimated physics parameters</u> and the same garment geometry as
-              ChatGarment.</em>
+
+                    <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_hit_row134.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row134_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row134_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row134_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/baselines/hit_row134_gt.mp4"></video>
+          </div>
+          <h4><em>AIpparel* and ChatGarment* predict geometry only; they are simulated with the
+              <u>most-common-material physics parameters</u>. Image2Garment uses <u>our estimated geometry and
+                estimated physics parameters</u>. Ground Truth is the ground-truth geometry simulated with the
+              ground-truth physics parameters.</em></h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="inthewild">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+          <h2 class="title is-3">In the Wild</h2>
+          <h4><em>Garments reconstructed from a single frame of an ordinary internet video, then
+              simulated on the motion recovered from that same video. Each row plays against its
+              source clip at matching length and speed.</em></h4>
+
+          <!-- labels -->
+          <div class="comparison-grid-4">
+            <div class="label">Source Video</div>
+            <div class="label">AIpparel* <a href="#ref1">[1]</a></div>
+            <div class="label">ChatGarment* <a href="#ref2">[2]</a></div>
+            <div class="label">Image2Garment (ours)</div>
+          </div>
+
+          <div class="comparison-row-4">
+            <video autoplay loop muted playsinline src="videos/wild/jumping_source.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/jumping_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/jumping_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/jumping_ours.mp4"></video>
+          </div>
+
+          <div class="comparison-row-4">
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_source.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_ours.mp4"></video>
+          </div>
+
+          <div class="comparison-row-4">
+            <video autoplay loop muted playsinline src="videos/wild/turkishspin_source.mp4"></video>
+            <div class="static-container-5"><span class="wild-missing">no reconstruction</span></div>
+            <video autoplay loop muted playsinline src="videos/wild/turkishspin_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/turkishspin_ours.mp4"></video>
+          </div>
+
+          <h4><em>AIpparel* and ChatGarment* predict geometry only; they are simulated with the
+              <u>most-common-material physics parameters</u>. Image2Garment uses <u>our estimated
+                geometry and estimated physics parameters</u>. AIpparel produces no garment for the
+              third example.</em></h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ablation">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width has-text-centered">
+          <h2 class="title is-3">Physics Parameter Ablation</h2>
+
+          <div class="comparison-grid-4">
+            <div class="label">Input Frame</div>
+            <div class="label">Most-Common-Material Params</div>
+            <div class="label">Our Estimated Params</div>
+            <div class="label">Ground Truth</div>
+          </div>
+
+          <div class="comparison-row-4">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_jj_row040.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/ablation/jj_row040_mc.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/jj_row040_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/jj_row040_gt.mp4"></video>
+          </div>
+
+          <div class="comparison-row-4">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_jj_row020.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/ablation/jj_row020_mc.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/jj_row020_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/jj_row020_gt.mp4"></video>
+          </div>
+
+          <div class="comparison-row-4">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_joy_row069.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/ablation/joy_row069_mc.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/joy_row069_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/joy_row069_gt.mp4"></video>
+          </div>
+
+          <div class="comparison-row-4">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_joy_row033.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/ablation/joy_row033_mc.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/joy_row033_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/joy_row033_gt.mp4"></video>
+          </div>
+
+          <div class="comparison-row-4">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_hit_row006.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/ablation/hit_row006_mc.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/hit_row006_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/hit_row006_gt.mp4"></video>
+          </div>
+
+          <div class="comparison-row-4">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_hit_row069.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/ablation/hit_row069_mc.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/hit_row069_estimated.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/ablation/hit_row069_gt.mp4"></video>
+          </div>
+          <h4><em>All columns use the <u>ground-truth garment geometry</u>; only the physics parameters differ.</em>
           </h4>
         </div>
       </div>
@@ -303,74 +488,55 @@
 
 
 
-  <section class="section" id="comparisons-side-by-side">
+  <section class="section" id="in-the-wild">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
-
-        <!-- Left Column: In-the-Wild -->
-        <div class="column is-half has-text-centered">
+        <div class="column is-full-width has-text-centered">
           <h2 class="title is-3">In-the-Wild Comparisons</h2>
 
-          <div class="comparison-grid-3">
-            <div class="label">ChatGarment* <a href="#ref3">[3]</a></div>
-            <div class="label">Image2Garment</div>
+          <div class="comparison-grid-5">
+            <div class="label">Input Frame</div>
+            <div class="label">AIpparel* <a href="#ref1">[1]</a></div>
+            <div class="label">ChatGarment* <a href="#ref2">[2]</a></div>
+            <div class="label">Image2Garment (ours)</div>
             <div class="label">Ground Truth</div>
           </div>
 
-          <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="videos/wild01/01_wild_chatgarment.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/wild01/01_wild_ours.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/wild01/01_wild_gt.mp4"></video>
+          <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_wild_jumping.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/wild/jumping_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/jumping_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/jumping_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/jumping_gt.mp4"></video>
           </div>
 
-          <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="videos/wild02/02_wild_chatgarment.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/wild02/02_wild_ours.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/wild02/02_wild_gt.mp4"></video>
+          <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_wild_lalaland.png" alt="Static Input">
+            </div>
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_aipparel.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/lalaland_gt.mp4"></video>
           </div>
 
-          <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="videos/wild03/03_wild_chatgarment.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/wild03/03_wild_ours.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/wild03/03_wild_gt.mp4"></video>
+          <div class="comparison-row-5">
+            <div class="static-container-5">
+              <img class="zoomable" src="figures/input_wild_turkishspin.png" alt="Static Input">
+            </div>
+            <div class="no-result">AIpparel* produced no<br>valid drape for this sequence</div>
+            <video autoplay loop muted playsinline src="videos/wild/turkishspin_chatgarment.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/turkishspin_ours.mp4"></video>
+            <video autoplay loop muted playsinline src="videos/wild/turkishspin_gt.mp4"></video>
           </div>
+
+          <h4><em>Garments reconstructed from a single frame of in-the-wild video and simulated on the
+              recovered body motion. AIpparel* and ChatGarment* predict geometry only and are simulated with the
+              <u>most-common-material physics parameters</u>; Image2Garment uses <u>our estimated geometry and
+                estimated physics parameters</u>. Ground Truth is the source video.</em></h4>
         </div>
-
-        <!-- Right Column: Ablation Study -->
-        <div class="column is-half has-text-centered">
-          <h2 class="title is-3">Ablation Study</h2>
-
-          <div class="comparison-grid-3">
-            <div class="label">Random Params</div>
-            <div class="label">Our Estimated Params</div>
-            <div class="label">Ground Truth</div>
-          </div>
-
-          <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="videos/ablation1/jumping_random.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation1/jumping_estimated.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation1/jumping_gt.mp4"></video>
-          </div>
-
-          <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="videos/ablation2/northern_random.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation2/northern_estimated.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation2/northern_gt.mp4"></video>
-          </div>
-
-          <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="videos/ablation3/jab_random.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation3/jab_estimated.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation3/jab_gt.mp4"></video>
-          </div>
-
-          <div class="comparison-row-3">
-            <video autoplay loop muted playsinline src="videos/ablation4/reaction_hit_random.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation4/reaction_hit_estimated.mp4"></video>
-            <video autoplay loop muted playsinline src="videos/ablation4/reaction_hit_gt.mp4"></video>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -378,44 +544,97 @@
   <section class="section" id="references">
     <div class="columns is-centered">
 
-      <!-- Left Column: In-the-Wild -->
       <div class="column is-half">
         <h2 class="title is-3">References</h2>
         <div class="reference-list">
           <div class="reference-item" id="ref1">
             <span class="ref-index">[1]</span>
-            <span class="ref-text">Li Ren, et al. "Single View Garment Reconstruction Using Diffusion Mapping Via
-              Pattern
-              Coordinates." <em>Proceedings of the Special Interest Group on Computer Graphics and Interactive
-                Techniques
-                Conference Conference Papers.</em> 2025.</span>
-          </div>
-
-          <div class="reference-item" id="ref2">
-            <span class="ref-index">[2]</span>
             <span class="ref-text">Nakayama Kiyohiro, et al. "AIpparel: A Multimodal Foundation Model for Digital
               Garments."
               <em>Proceedings of the Computer Vision and Pattern Recognition Conference.</em> 2025.</span>
           </div>
 
-          <div class="reference-item" id="ref3">
-            <span class="ref-index">[3]</span>
+          <div class="reference-item" id="ref2">
+            <span class="ref-index">[2]</span>
             <span class="ref-text">Bian Siyuan, et al. "Chatgarment: Garment estimation, generation and editing via
               large
               language models." <em>Proceedings of the Computer Vision and Pattern Recognition Conference.</em>
               2025.</span>
           </div>
         </div>
+
+          <div class="reference-item" id="ref3">
+            <span class="ref-index">[3]</span>
+            <span class="ref-text">Nakayama Kiyohiro, et al. "Garment Particles: A 2D&ndash;3D Symmetric
+              Garment Representation for Generation and Editing." <em>SIGGRAPH Conference Papers.</em>
+              2026.</span>
+          </div>
       </div>
   </section>
 
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>BibTeX entry will be added once available.</code></pre>
-    </div>
-  </section>
+  <script>
+    // Row-synced playback that stays light with many videos on the page:
+    // - a row only plays while it is on screen (off-screen rows are paused);
+    // - native loop is disabled and the whole row restarts together when its
+    //   first video ends, so loops never drift;
+    // - a slow watchdog fixes only real drift (decode hiccups), instead of
+    //   seeking every video at every loop boundary.
+    document.addEventListener('DOMContentLoaded', function () {
+      var groups = [];
+      document.querySelectorAll('.comparison-row-5, .comparison-row-4, .comparison-row-3').forEach(function (row) {
+        var vids = Array.prototype.slice.call(row.querySelectorAll('video'));
+        if (vids.length < 2) return;
+        vids.forEach(function (v) {
+          v.removeAttribute('autoplay');
+          v.removeAttribute('loop');
+          v.muted = true;
+          v.pause();
+        });
+        var g = { vids: vids, master: vids[0], visible: false };
+        g.master.addEventListener('ended', function () { restart(g); });
+        vids.forEach(function (v) {
+          v.addEventListener('canplaythrough', function () { maybeStart(g); });
+        });
+        groups.push(g);
+        row.__group = g;
+      });
 
+      function restart(g) {
+        if (!g.visible) return;
+        g.vids.forEach(function (v) { v.currentTime = 0; });
+        g.vids.forEach(function (v) { v.play(); });
+      }
+      function maybeStart(g) {
+        if (!g.visible || !g.master.paused) return;
+        if (g.vids.every(function (v) { return v.readyState >= 3; })) restart(g);
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var g = e.target.__group;
+          if (!g) return;
+          g.visible = e.isIntersecting;
+          if (g.visible) maybeStart(g);
+          else g.vids.forEach(function (v) { v.pause(); });
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.comparison-row-5, .comparison-row-4, .comparison-row-3').forEach(function (row) {
+        if (row.__group) io.observe(row);
+      });
+
+      setInterval(function () {
+        groups.forEach(function (g) {
+          if (!g.visible || g.master.paused || g.master.currentTime < 0.5) return;
+          if (g.master.duration - g.master.currentTime < 0.5) return;   // skip loop boundary
+          g.vids.slice(1).forEach(function (v) {
+            if (Math.abs(v.currentTime - g.master.currentTime) > 0.2) {
+              v.currentTime = g.master.currentTime;
+            }
+          });
+        });
+      }, 2000);
+    });
+  </script>
 
   <footer class="footer">
 
